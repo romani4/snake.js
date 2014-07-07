@@ -7,10 +7,15 @@ var App = (function() {
     'use strict';
 
     var defaultSettings = {
-        cycleDuration: 1000,
-        snakeDefaultSize: 10,
+        xSize: 10,
+        ySize: 10,
+
+
+        cycleDuration: 500,
+        snakeDefaultSize: 3,
         snakeIncrementalSize: 5,
 
+        unitSize: 10,
         deskBackgroundColor: 'lightgreen',
         snakeBodyColor: 'black',
         snakeHeadColor: 'black'
@@ -20,8 +25,8 @@ var App = (function() {
         this.settings = defaultSettings; // TODO: extend
         this.settings.canvasElement = document.getElementById('canvas');
 
-        this.desk = new Desk( this.settings.canvasElement, 50, 30, 10 );
-        this.desk.clean( this.settings.deskBackgroundColor );
+        this.desk = new Desk(this);
+        this.snake = new Snake(this);
 
         run.call(this);
     }

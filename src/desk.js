@@ -6,25 +6,35 @@
 var Desk =(function() {
     'use strict';
 
-    function Desk(canvasElement, xSize, ySize, unitSize) {
-        this.canvasElement = canvasElement;
-        this.xSize = xSize;
-        this.ySize = ySize;
-        this.unitSize = unitSize;
+    function Desk(app){
 
-        this.canvasElement.setAttribute('width', xSize*unitSize);
-        this.canvasElement.setAttribute('height', ySize*unitSize);
-        this.drawingArea = this.canvasElement.getContext("2d");
+        this.app = app;
+        var settings = app.settings;
+
+        settings.canvasElement.setAttribute( 'width',
+            (settings.xSize * settings.unitSize).toString()
+        );
+
+        settings.canvasElement.setAttribute( 'height',
+            (settings.ySize * settings.unitSize).toString()
+        );
+
+        this.drawingArea = settings.canvasElement.getContext("2d");
     }
 
-    Desk.prototype.clean = function(color){
-        this.drawingArea.fillStyle = color;
-        this.drawingArea.fillRect( 0, 0, this.xSize*this.unitSize, this.ySize*this.unitSize);
+    Desk.prototype.clean = function(){
+        var width = this.app.settings.xSize * this.app.settings.unitSize;
+        var height = this.app.settings.ySize * this.app.settings.unitSize;
+
+        this.drawingArea.fillStyle = this.app.settings.deskBackgroundColor;
+        this.drawingArea.fillRect( 0, 0, width , height);
     };
 
     Desk.prototype.putField = function(x,y,color){
         this.drawingArea.fillStyle = color;
-        this.drawingArea.fillRect( x*this.unitSize + 1 , y*this.unitSize+1, this.unitSize-1 , this.unitSize-1 );
+        this.drawingArea.fillRect(
+            x*this.app.settings.unitSize + 1 , y*this.app.settings.unitSize+1,
+            this.app.settings.unitSize-1 , this.app.settings.unitSize-1 );
     };
 
     return Desk;
