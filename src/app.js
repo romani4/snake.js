@@ -1,5 +1,6 @@
 /**
  * @author romani4 <dima.romanov.1990@gmail.com>
+ * @requires Desk
  */
 
 var App = (function() {
@@ -13,6 +14,7 @@ var App = (function() {
 
     function App(settings) {
         this.settings = defaultSettings; // TODO: extend
+
         console.log('run');
     }
 
@@ -20,7 +22,7 @@ var App = (function() {
 })();
 
 (function(){
-    this.onload = function(){
+    this.onload = function() {
         this.App = new App( {} );
     }
 }).call(window);
