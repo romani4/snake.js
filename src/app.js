@@ -42,7 +42,8 @@ var App = (function() {
     };
 
     var loop = function(){
-
+        this.snake.move( );
+        this.snake.draw( );
     };
 
     return App;
