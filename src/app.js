@@ -43,7 +43,7 @@ var App = (function() {
 
     var loop = function(){
         this.snake.move( );
-        this.snake.draw( );
+        this.desk.redraw();
     };
 
     return App;
@@ -51,6 +51,6 @@ var App = (function() {
 
 (function(){
     this.onload = function() {
-        this.App = new App( {} );
+        new App( {} );
     }
 }).call(window);

@@ -16,7 +16,6 @@ var Snake = (function(){
     function Snake(app){
         this.app = app;
         this.direction = SNAKE_DIRECTION.DOWN;
-        this.isInitDraw = true;
         for(var item=0; item<app.settings.snakeDefaultSize; item++){
             this.push({
                 x: item,
@@ -76,22 +75,6 @@ var Snake = (function(){
                 console.log('Unknown direction');
                 break;
         }
-    };
-
-    var initDraw = function() {
-        var desk = this.app.desk;
-        desk.clean();
-        this.forEach( function(item){
-            desk.putField( item.x, item.y, 'black' );
-        }, this );
-    };
-
-    Snake.prototype.draw = function () {
-        if(this.isInitDraw){
-            this.isInitDraw = false;
-            initDraw.call(this);
-        }
-        initDraw.call(this);// TODO: optimize draw
     };
 
     Snake.prototype.head = function () {
