@@ -4,10 +4,10 @@
 
 /* finally */
 var SNAKE_DIRECTION  = {
-    UP:0,
-    RIGHT:1,
-    DOWN:2,
-    LEFT:3
+    UP:38,
+    RIGHT:39,
+    DOWN:40,
+    LEFT:37
 };
 
 var Snake = (function(){
@@ -67,7 +67,7 @@ var Snake = (function(){
                 break;
             case SNAKE_DIRECTION.LEFT:
                 this.push({
-                    x: (currentHead.x-1 >= xSize)? currentHead.x-1: xSize-1,
+                    x: (currentHead.x-1 >= 0)? currentHead.x-1: xSize-1,
                     y: currentHead.y
                 });
                 break;

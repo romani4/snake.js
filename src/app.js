@@ -46,11 +46,21 @@ var App = (function() {
         this.desk.redraw();
     };
 
+    App.prototype.onkeydown = function(ev){
+        var keyCode = ev.keyCode;
+        if(keyCode >= 37 && keyCode <=40){
+            this.snake.turn(keyCode);
+        }
+    };
+
     return App;
 })();
 
 (function(){
     this.onload = function() {
-        new App( {} );
+        var app = new App( {} );
+        this.onkeydown = function(ev){app.onkeydown(ev)};
     }
+
+
 }).call(window);
