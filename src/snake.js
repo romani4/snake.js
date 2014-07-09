@@ -15,28 +15,30 @@ var Snake = (function(){
 
     function Snake(app){
         this.app = app;
-        this.direction = SNAKE_DIRECTION.DOWN;
+        this._direction = SNAKE_DIRECTION.RIGHT;
         for(var item=0; item<app.settings.snakeDefaultSize; item++){
             this.push({
                 x: item,
                 y: 0
             });
         }
+        this._isTurned = false;
     }
 
     Snake.prototype = [];
 
     Snake.prototype.turn = function (direction) {
-        switch (direction){
-            case SNAKE_DIRECTION.UP:
-            case SNAKE_DIRECTION.RIGHT:
-            case SNAKE_DIRECTION.DOWN:
-            case SNAKE_DIRECTION.LEFT:
-                this.direction = direction
-                break;
-            default:
-                console.log('Unknown direction');
-                break;
+        if(direction === this._direction || this._isTurned){
+            return;
+        }
+
+        if( (SNAKE_DIRECTION.UP===direction    && SNAKE_DIRECTION.DOWN!==this._direction )||
+            (SNAKE_DIRECTION.RIGHT===direction && SNAKE_DIRECTION.LEFT!==this._direction ) ||
+            (SNAKE_DIRECTION.DOWN===direction  && SNAKE_DIRECTION.UP!==this._direction ) ||
+            (SNAKE_DIRECTION.LEFT===direction  && SNAKE_DIRECTION.RIGHT!==this._direction ) )
+        {
+            this._direction = direction;
+            this._isTurned = true;
         }
     };
 
@@ -46,7 +48,7 @@ var Snake = (function(){
         var xSize = this.app.settings.xSize;
         var ySize = this.app.settings.ySize;
 
-        switch(this.direction){
+        switch(this._direction){
             case SNAKE_DIRECTION.UP:
                 this.push({
                     x: currentHead.x,
@@ -75,6 +77,7 @@ var Snake = (function(){
                 console.log('Unknown direction');
                 break;
         }
+        this._isTurned = false;
     };
 
     Snake.prototype.head = function () {
