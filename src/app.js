@@ -37,12 +37,17 @@ var App = (function() {
             var loopResult = loop.call(context);
             if( undefined !== loopResult && loopResult!==0 ){
                 clearInterval(intervalId);
+                alert('Looser! Your scores: ' + loopResult);
             }
         }, this.settings.cycleDuration );
     };
 
     var loop = function(){
         this.snake.move( );
+        var isCollisionDetected = this.snake.detectCollisions();
+        if(isCollisionDetected){
+            return this.snake.length;
+        }
         this.desk.redraw();
     };
 

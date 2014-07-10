@@ -80,6 +80,19 @@ var Snake = (function(){
         this._isTurned = false;
     };
 
+    Snake.prototype.detectCollisions = function(){
+        var isCollision = false;
+        var head = this.head();
+
+        this.forEach( function(bodyItem) {
+            if( bodyItem!==head && bodyItem.x === head.x && bodyItem.y === head.y){
+                console.log('collision');
+                isCollision = true;
+            }
+        });
+        return isCollision;
+    };
+
     Snake.prototype.head = function () {
         return this[ this.length-1 ];
     };
